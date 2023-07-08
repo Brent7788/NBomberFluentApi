@@ -19,7 +19,7 @@ public class WeatherForecastStressTests
     }
 
     [Fact]
-    public async Task Test1()
+    public async Task GetWeatherForecastStressTestShouldBe()
     {
         var r = await _client.GetAsync("WeatherForecast");
 
@@ -27,7 +27,7 @@ public class WeatherForecastStressTests
         Console.WriteLine($"Is this working ===================== {l}");
         _outputHelper.WriteLine("First test==========================");
 
-        var s = StressTestFluentApi
+        var nodeStats = StressTestFluentApi
             .Start()
             .SetHttpClient(_client)
             .SetUrl("WeatherForecast")
@@ -37,6 +37,7 @@ public class WeatherForecastStressTests
             .WithScenarioDuration(3)
             .Run();
 
-        Console.WriteLine($"Is this working ===================== {s}");
+        Assert.NotNull(nodeStats);
+        Console.WriteLine($"Is this working ===================== {nodeStats}");
     }
 }
